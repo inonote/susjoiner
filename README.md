@@ -17,6 +17,8 @@ susjoiner <base SUS file>
 2. `susjoiner.exe` のアイコンにベースとなるsusファイルをD&Dします。(ターミナルで実行も可)
 3. 合成済みの完成品が `<ベース譜面のファイル名>.joined.sus` の名前で出力されます。
 
+![](https://user-images.githubusercontent.com/32731693/107115697-ca738300-68b1-11eb-9890-19cb287d8bc7.gif)
+
 ## ビルド
 ```
 g++ -std=c++17 main.cpp -o susjoiner
