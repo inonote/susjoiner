@@ -1,5 +1,5 @@
 /*
-  susjoiner v0.1
+  susjoiner v0.1.1
 
   Copyright (C) 2021  inonote
 
@@ -35,7 +35,7 @@ char ito36(uint32_t i) {
 int main(int argc, char* argv[]) {
   if (argc < 2) {
     cout
-        << "susjoiner v0.1 -- Copyright (C) 2021  inonote" << endl
+        << "susjoiner v0.1.1 -- Copyright (C) 2021  inonote" << endl
         << endl
         << "Usage: susjoiner <base SUS file>" << endl
         << endl
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
   regex re_replace1("#[0-9a-zA-Z]*[^:] [\\s\\S]*?([\r\n])");
   regex re_replace2("#0000[28]: [0-9.]*?([\r\n])");
   regex re_replace3("#BPM[0-9A-Z][0-9A-Z]: [0-9.]*?([\r\n])");
-  regex re_replace4("#TIL00: ([\\s\\S]*?)([\r\n])");
+  regex re_replace4("#TIL00: ([\\s\\S]*?)(\r|\n|\r\n)");
   
   ofstream outputFile(outputFilePath, ios::app);
 
@@ -90,10 +90,10 @@ int main(int argc, char* argv[]) {
       buf = std::regex_replace(buf, re_replace1, "$1");
       buf = std::regex_replace(buf, re_replace2, "$1");
       buf = std::regex_replace(buf, re_replace3, "$1");
-      buf = std::regex_replace(buf, re_replace4, string("#TIL") + timelineIndexBase36 + " $1\n#HISPEED " + timelineIndexBase36);
+      buf = std::regex_replace(buf, re_replace4, string("#TIL") + timelineIndexBase36 + ": $1$2#HISPEED " + timelineIndexBase36 + "$2");
 
       // ぶち込む
-      outputFile << buf << endl;
+      outputFile << buf << "\r\n";
     }
   }
 
